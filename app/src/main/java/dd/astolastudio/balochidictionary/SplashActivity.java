@@ -13,7 +13,7 @@ public class SplashActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(1024, 1024);
 		setContentView(R.layout.wordbook_splash);
-		this.countdown = new CountDownTimer(3000*0, 500) {
+		this.countdown = new CountDownTimer(3000, 500) {
 			public void onTick(long millisUntilFinished) {
 			}
 
