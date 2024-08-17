@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="green_accent_alt">#fffafafa</color>
+	<color name="green_accent_dark">#ff097743</color>
+	<color name="green_accent_light">#ff12b566</color>
+	<color name="green_primary">#ff0f9d58</color>
+	
+	<color name="background">#ffffffff</color>
+	<color name="background_material_inverse">@color/background_material_dark</color>
+	<color name="primary_dark_material_inverse">@color/primary_dark_material_dark</color>
+	<color name="primary_text_default_material_inverse">@color/primary_text_default_material_dark</color>
+	<color name="secondary_text_default_material_inverse">@color/secondary_text_default_material_dark</color>
+
+	<color name="background_inverse">@color/background_material_dark</color>
+	<color name="background_material">@color/background_material_light</color>
+	<color name="primary_dark_material">@color/primary_dark_material_light</color>
+	<color name="primary_text_default_material">@color/primary_text_default_material_light</color>
+	<color name="secondary_text_default_material">@color/secondary_text_default_material_light</color>
+</resources>

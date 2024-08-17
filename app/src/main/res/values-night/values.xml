@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="MySearchViewStyle" parent="@style/Widget.AppCompat.SearchView">
+		<item name="suggestionRowLayout">@layout/search_suggestion_row</item>
+	</style>
+	
+	<color name="background">@color/background_material_dark</color>
+	<color name="background_material">@color/background_material_dark</color>
+	<color name="primary_dark_material">@color/primary_dark_material_dark</color>
+	<color name="primary_text_default_material">@color/primary_text_default_material_dark</color>
+	<color name="secondary_text_default_material">@color/secondary_text_default_material_dark</color>
+
+	<color name="background_inverse">#ffffff</color>
+	<color name="background_material_inverse">@color/background_material_light</color>
+	<color name="primary_dark_material_inverse">@color/primary_dark_material_light</color>
+	<color name="primary_text_default_material_inverse">@color/primary_text_default_material_light</color>
+	<color name="secondary_text_default_material_inverse">@color/secondary_text_default_material_light</color>
+	
+</resources>

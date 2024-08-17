@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="action_bar_elevation">2.0dip</dimen>
+	<item type="dimen" name="dialog_fixed_height_major">79.99999%</item>
+	<item type="dimen" name="dialog_fixed_height_minor">100.0%</item>
+	<dimen name="dialog_fixed_width_major">320.0dip</dimen>
+	<dimen name="dialog_fixed_width_minor">320.0dip</dimen>
+	<item type="dimen" name="disabled_alpha_material_dark">0.3</item>
+	<item type="dimen" name="disabled_alpha_material_light">0.26</item>
+	<dimen name="navigation_drawer_width">320.0dip</dimen>
+</resources>
