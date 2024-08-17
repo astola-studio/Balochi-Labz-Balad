@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dd.astolastudio.balochidictionary.LangTextView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:custom="http://schemas.android.com/apk/res-auto"
+	android:textAppearance="?android:textAppearanceListItemSmall"
+	android:textColor="@color/primary_text_default_material"
+	android:gravity="center_vertical"
+	android:id="@android:id/text1"
+	android:background="?android:activatedBackgroundIndicator"
+	android:paddingLeft="16.0dip"
+	android:paddingRight="?android:listPreferredItemPaddingRight"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="?android:listPreferredItemHeightSmall"
+	android:paddingEnd="?android:listPreferredItemPaddingEnd"
+	custom:allowTextSizeChanges="false"/>
+

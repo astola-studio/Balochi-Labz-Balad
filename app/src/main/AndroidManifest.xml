@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="dd.astolastudio.balochidictionary">
+
+	<application
+		android:name=".App"
+		android:allowBackup="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:theme="@style/AppTheme"
+		android:resizeableActivity="true">
+
+		<activity
+			android:label="@string/app_name"
+			android:name=".SplashActivity"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action
+					android:name="android.intent.action.MAIN" />
+				<category
+					android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".MainActivity"
+			android:launchMode="singleTop"
+			android:screenOrientation="portrait">
+			<meta-data
+				android:name="android.app.searchable"
+				android:resource="@xml/searchable" />
+			<intent-filter>
+				<action
+					android:name="android.intent.action.SEARCH" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".wordbook.WordbookDetailActivity"
+			android:screenOrientation="portrait"
+			android:parentActivityName=".MainActivity">
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value=".MainActivity" />
+		</activity>
+		<activity
+			android:name=".subdict.SubdictDetailActivity"
+			android:screenOrientation="portrait"
+			android:parentActivityName=".MainActivity">
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:screenOrientation="portrait"
+				android:value=".MainActivity" />
+		</activity>
+		<activity
+			android:label="@string/title_activity_settings"
+			android:name=".SettingsActivity"
+			android:screenOrientation="portrait" />
+		<activity
+			android:name=".wordbook.ViewonwebToolActivity"
+			android:screenOrientation="portrait" />
+		<provider
+			android:name=".data.wordbook.WordbookProvider"
+			android:exported="false"
+			android:authorities="dd.astolastudio.balochidictionary.data.wordbook.WordbookProvider" />
+		<provider
+			android:name=".data.appdata.WordbookFavoritesProvider"
+			android:exported="false"
+			android:authorities="dd.astolastudio.balochidictionary.data.appdata.WordbookFavoritesProvider" />
+		<provider
+			android:name=".data.appdata.WordbookHistoryProvider"
+			android:exported="false"
+			android:authorities="dd.astolastudio.balochidictionary.data.appdata.WordbookHistoryProvider" />
+		<provider
+			android:name=".data.subdict.SubdictProvider"
+			android:exported="false"
+			android:authorities="dd.astolastudio.balochidictionary.data.subdict.SubdictProvider" />
+		<provider
+			android:name=".data.appdata.SubdictBookmarksProvider"
+			android:exported="false"
+			android:authorities="dd.astolastudio.balochidictionary.data.appdata.SubdictBookmarksProvider" />
+		
+		<activity android:name=".common.crash.CrashHandler$CrashActiviy"/>
+			
+	  <meta-data
+		  android:name="android.max_aspect"
+		  android:value="4.0"/>
+
+	</application>
+	
+</manifest>

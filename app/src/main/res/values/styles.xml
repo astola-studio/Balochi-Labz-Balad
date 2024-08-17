@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+		<item name="android:popupBackground">@color/background</item>
+		<item name="android:textAppearanceMedium">@style/TextAppearanceDark</item>
+		<item name="searchViewStyle">@style/MySearchViewStyle</item>
+		<item name="colorPrimary">@color/green_primary</item>
+		<item name="colorAccent">@color/green_accent_light</item>
+	</style>
+
+	<style name="MySearchViewStyle" parent="@style/Widget.AppCompat.Light.SearchView">
+		<item name="suggestionRowLayout">@layout/search_suggestion_row</item>
+	</style>
+	
+	<style name="TextAppearanceDark" parent="@android:style/TextAppearance.Medium">
+		<item name="android:textColor">@color/primary_text_default_material</item>
+	</style>
+	
+	<style name="ThickDivider">
+		<item name="android:background">?android:listDivider</item>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">3.0dip</item>
+	</style>
+	
+	<style name="ThinDivider">
+		<item name="android:background">?android:listDivider</item>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">1.0dip</item>
+	</style>
+	
+	
+</resources>
