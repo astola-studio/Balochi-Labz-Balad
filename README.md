@@ -19,8 +19,7 @@ This dictionary app contains 15,000 Balochi words, offering a simple yet powerfu
 This project is currently being revived and is open for contributions. The source code may have bugs and lacks some features, so community contributions are encouraged to improve and update the app.
 
 ## Original APK
-For reference, the original APK can be downloaded from:
-[Original APK on APKPure](https://apkpure.com/balochi-labz-balad-dictionary/com.azambaloch.dictionary)
+For reference, the original APK can be downloaded from [APKPure](https://apkpure.com/balochi-labz-balad-dictionary/com.azambaloch.dictionary)
 
 ## Features
 - **15,000 Balochi Words:** A comprehensive dictionary for the Balochi language.
@@ -63,11 +62,12 @@ Where have we reached so far?
 - [x] Add Search Filters
 - [x] Add Dark Mode
 - [x] Fix Theming (Minor)
+- [ ] Add More Words (Reach 15K)
 - [ ] Run a Success Build in [Actions](https://github.com/astola-studio/Balochi-Labz-Balad/actions)
 - [ ] Fix Drawer Bug (Highlighting)
 - [ ] Fix/Sort the Dict DB
 - [ ] Add English to Balochi
-- [ ] Add features suggested by [Community](https://github.com/astola-studio/Balochi-Labz-Balad/issues)
+- [ ] Add/Fix features suggested by [Community](https://github.com/astola-studio/Balochi-Labz-Balad/issues)
 
 ## License
 Since the original authors have not provided explicit permission, the licensing of this project is currently pending. Contributors are advised to be mindful of the project’s origins and the intent to keep it open-source and community-driven.
