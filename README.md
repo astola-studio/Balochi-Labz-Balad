@@ -63,9 +63,11 @@ Where have we reached so far?
 - [x] Add Search Filters
 - [x] Add Dark Mode
 - [x] Fix Theming (Minor)
+- [ ] Run a Success Build in [Actions](https://github.com/astola-studio/Balochi-Labz-Balad/actions)
 - [ ] Fix Drawer Bug (Highlighting)
 - [ ] Fix/Sort the Dict DB
 - [ ] Add English to Balochi
+- [ ] Add features suggested by [Community](https://github.com/astola-studio/Balochi-Labz-Balad/issues)
 
 ## License
 Since the original authors have not provided explicit permission, the licensing of this project is currently pending. Contributors are advised to be mindful of the project’s origins and the intent to keep it open-source and community-driven.
