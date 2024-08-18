@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class SplashActivity extends Activity {
 	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(1);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		getWindow().setFlags(1024, 1024);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.wordbook_splash);
 		
 		new Timer().schedule(new TimerTask(){
@@ -23,7 +26,9 @@ public class SplashActivity extends Activity {
 				}
 			}, 3000);
 	}
-
+	
+	@Override
 	public void onBackPressed() {
+		// Disallow Back Press
 	}
 }
