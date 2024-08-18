@@ -61,29 +61,29 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	private static final String KEY_SUBTITLE = "action_bar_subtitle";
 	private static final String KEY_TITLE = "action_bar_title";
 	private static final String TAG = "MainActivity";
-	
+
 	private Mode mMode;
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 	private CharSequence mSubtitle;
 	private CharSequence mTitle;
 	private boolean mTwoPane;
-	
+
 	public static class ClearSubdictBookmarksDialogFragment extends DialogFragment {
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			Builder builder = new Builder(getActivity());
 			builder.setMessage(R.string.clear_subdict_bookmarks_dialog_message);
 			builder.setPositiveButton(R.string.ok, new OnClickListener() {
-				public void onClick(DialogInterface dialogInterface, int i) {
-					MainActivity activity = (MainActivity) ClearSubdictBookmarksDialogFragment.this.getActivity();
-					activity.getContentResolver().delete(SubdictBookmarks.CONTENT_URI, null, null);
-					Toast.makeText(activity.getApplicationContext(), ClearSubdictBookmarksDialogFragment.this.getString(R.string.toast_clear_subdict_bookmarks), 0).show();
-				}
-			});
+					public void onClick(DialogInterface dialogInterface, int i) {
+						MainActivity activity = (MainActivity) ClearSubdictBookmarksDialogFragment.this.getActivity();
+						activity.getContentResolver().delete(SubdictBookmarks.CONTENT_URI, null, null);
+						Toast.makeText(activity.getApplicationContext(), ClearSubdictBookmarksDialogFragment.this.getString(R.string.toast_clear_subdict_bookmarks), 0).show();
+					}
+				});
 			builder.setNegativeButton(R.string.cancel, new OnClickListener() {
-				public void onClick(DialogInterface dialogInterface, int i) {
-					dialogInterface.dismiss();
-				}
-			});
+					public void onClick(DialogInterface dialogInterface, int i) {
+						dialogInterface.dismiss();
+					}
+				});
 			return builder.create();
 		}
 	}
@@ -93,16 +93,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 			Builder builder = new Builder(getActivity());
 			builder.setMessage(R.string.clear_wordbook_favorites_dialog_message);
 			builder.setPositiveButton(R.string.ok, new OnClickListener() {
-				public void onClick(DialogInterface dialogInterface, int i) {
-					ClearWordbookFavoritesDialogFragment.this.getActivity().getContentResolver().delete(WordbookFavorites.CONTENT_URI, null, null);
-					Toast.makeText(ClearWordbookFavoritesDialogFragment.this.getActivity(), ClearWordbookFavoritesDialogFragment.this.getString(R.string.toast_clear_wordbook_favorites), 0).show();
-				}
-			});
+					public void onClick(DialogInterface dialogInterface, int i) {
+						ClearWordbookFavoritesDialogFragment.this.getActivity().getContentResolver().delete(WordbookFavorites.CONTENT_URI, null, null);
+						Toast.makeText(ClearWordbookFavoritesDialogFragment.this.getActivity(), ClearWordbookFavoritesDialogFragment.this.getString(R.string.toast_clear_wordbook_favorites), 0).show();
+					}
+				});
 			builder.setNegativeButton(R.string.cancel, new OnClickListener() {
-				public void onClick(DialogInterface dialogInterface, int i) {
-					dialogInterface.dismiss();
-				}
-			});
+					public void onClick(DialogInterface dialogInterface, int i) {
+						dialogInterface.dismiss();
+					}
+				});
 			return builder.create();
 		}
 	}
@@ -121,10 +121,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 			scrollView.addView(textView);
 			builder.setView(scrollView);
 			builder.setPositiveButton(R.string.ok, new OnClickListener() {
-				public void onClick(DialogInterface dialogInterface, int i) {
-					dialogInterface.dismiss();
-				}
-			});
+					public void onClick(DialogInterface dialogInterface, int i) {
+						dialogInterface.dismiss();
+					}
+				});
 			return builder.create();
 		}
 	}
@@ -203,51 +203,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	}
 
 	public void onItemSelected(String fragmentName) {
-		int i = -1;
-		switch (fragmentName.hashCode()) {
-			case -1773240821:
-				if (fragmentName.equals("wordbook_favorites")) {
-					i = 1;
-					break;
-				}
-				break;
-			case -616935594:
-				if (fragmentName.equals("wordbook_browse")) {
-					i = 0;
-					break;
-				}
-				break;
-			case 495512872:
-				if (fragmentName.equals("wordbook_History")) {
-					i = 2;
-					break;
-				}
-				break;
-			case 1515858676:
-				if (fragmentName.equals("subdict_bookmarks")) {
-					i = 4;
-					break;
-				}
-				break;
-			case 2107570419:
-				if (fragmentName.equals("subdict_browse")) {
-					i = 3;
-					break;
-				}
-				break;
-		}
-		switch (i) {
-			case 0:
-			case 1:
-			case 2:
-				wordbookItemSelected();
-				break;
-			case 3:
-			case 4:
-				subdictItemSelected();
-				break;
-			default:
-				throw new IllegalArgumentException("Invalid fragment name");
+		if (fragmentName.startsWith("wordbook_")) {
+			wordbookItemSelected();
+		} else if (fragmentName.startsWith("subdict_")) {
+			subdictItemSelected();
+		} else {
+			throw new IllegalArgumentException("Invalid fragment name");
 		}
 		invalidateOptionsMenu();
 	}
