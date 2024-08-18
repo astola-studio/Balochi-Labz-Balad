@@ -500,7 +500,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	}
 
 	private void ensureNavDrawerSelection(Mode mode) {
-		if (this.mNavigationDrawerFragment != null && this.mNavigationDrawerFragment.getCurrentSelectedPosition() != mode.getPosition()) {
+		if (this.mNavigationDrawerFragment != null) {
 			this.mNavigationDrawerFragment.setCurrentSelectedPosition(mode.getPosition());
 		}
 	}
