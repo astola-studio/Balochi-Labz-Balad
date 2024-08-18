@@ -63,7 +63,7 @@ Where have we reached so far?
 - [x] Add Dark Mode
 - [x] Fix Theming (Minor)
 - [x] Fix Drawer Bug (Highlighting)
-- [ ] Add User Dictionary (with cloud upload)
+- [ ] Add User Dictionary ([Suggest Here](https://github.com/astola-studio/Balochi-Labz-Balad/issues))
 - [ ] Fix/Sort the Dict DB
 - [ ] Add English to Balochi
 - [ ] Add More Words (Reach 15K)
