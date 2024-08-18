@@ -62,11 +62,11 @@ Where have we reached so far?
 - [x] Add Search Filters
 - [x] Add Dark Mode
 - [x] Fix Theming (Minor)
-- [ ] Add More Words (Reach 15K)
-- [ ] Run a Success Build in [Actions](https://github.com/astola-studio/Balochi-Labz-Balad/actions)
-- [ ] Fix Drawer Bug (Highlighting)
+- [x] Fix Drawer Bug (Highlighting)
 - [ ] Fix/Sort the Dict DB
 - [ ] Add English to Balochi
+- [ ] Add More Words (Reach 15K)
+- [ ] Run a Success Build in [Actions](https://github.com/astola-studio/Balochi-Labz-Balad/actions)
 - [ ] Add/Fix features suggested by [Community](https://github.com/astola-studio/Balochi-Labz-Balad/issues)
 
 ## License
