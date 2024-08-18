@@ -63,6 +63,7 @@ Where have we reached so far?
 - [x] Add Dark Mode
 - [x] Fix Theming (Minor)
 - [x] Fix Drawer Bug (Highlighting)
+- [ ] Add User Dictionary (with cloud upload)
 - [ ] Fix/Sort the Dict DB
 - [ ] Add English to Balochi
 - [ ] Add More Words (Reach 15K)
