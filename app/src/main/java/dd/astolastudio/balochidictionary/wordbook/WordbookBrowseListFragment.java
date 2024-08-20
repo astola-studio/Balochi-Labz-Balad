@@ -15,8 +15,8 @@ import dd.astolastudio.balochidictionary.data.wordbook.WordbookContract;
 
 public class WordbookBrowseListFragment extends AbstractWordbookListFragment implements LoaderCallbacks<Cursor> {
 	public static final String NAME = "wordbook_browse";
-	private static final String ORDER_BY = "langLowercase ASC";
-	private static final String[] PROJECTION = new String[]{"_id", "langFullWord", "langLowercase", "soundName"};
+	private static final String ORDER_BY = "balochi ASC";
+	private static final String[] PROJECTION = new String[]{"_id", "balochi", "english", "urdu", "pronunciation"};
 	private static final String SELECTION = "";
 	private static final String[] SELECTION_ARGS = new String[0];
 	private static final String TAG = "WordbookBrowseListFragment";
@@ -30,7 +30,7 @@ public class WordbookBrowseListFragment extends AbstractWordbookListFragment imp
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.lang_simple_list_item_activated_1, null, new String[]{"langFullWord"}, new int[]{android.R.id.text1}, 0);
+		this.mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.lang_simple_list_item_activated_1, null, new String[]{"balochi"}, new int[]{android.R.id.text1}, 0);
 		setListAdapter(this.mAdapter);
 		getLoaderManager().initLoader(0, null, this);
 	}

@@ -78,6 +78,7 @@ public class NavigationDrawerFragment extends Fragment {
 									getString(R.string.nav_drawer_row_history),
 									R.drawable.ic_history_white_24dp,
 									getActivity()),
+			/* // They don’t seem to be useful anymore (atleast for now)
 			new NavigationDrawerHeading(200,
 										getString(R.string.nav_drawer_heading_grammar)),
 			new NavigationDrawerRow(201,
@@ -87,7 +88,9 @@ public class NavigationDrawerFragment extends Fragment {
 			new NavigationDrawerRow(202,
 									getString(R.string.nav_drawer_row_bookmarks),
 									R.drawable.ic_bookmark_white_24dp,
-									getActivity())};
+									getActivity())
+			*/
+			};
 		this.navigationDrawerAdapter = new NavigationDrawerAdapter(getActivity(), android.R.layout.simple_list_item_activated_2, this.navigationDrawerItems);
 		this.navigationDrawerAdapter.setOnCategoryChange(new OnCategoryChange() {
 				public void onChange(String s, int i) {

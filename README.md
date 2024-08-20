@@ -43,6 +43,8 @@ You can use % for prefix, suffix and wild card filtering. Like:
 - **ب%تگ**: بُرتگ، بوتگ، …
 - **باز**: ہُنر باز، بازیں، …
 
+_Additionally, Search also works with Urdu, English & Pronunciations._
+
 ## Getting Started
 ### Installation
 To get started, clone this repository to your local machine using:
@@ -63,10 +65,10 @@ Where have we reached so far?
 - [x] Add Dark Mode
 - [x] Fix Theming (Minor)
 - [x] Fix Drawer Bug (Highlighting)
-- [ ] Add User Dictionary ([Suggest Here](https://github.com/astola-studio/Balochi-Labz-Balad/issues))
-- [ ] Fix/Sort the Dict DB
+- [x] Fix/Sort the Dict DB
 - [ ] Add English to Balochi
 - [ ] Add More Words (Reach 15K)
+- [ ] Add User Dictionary ([Suggest Here](https://github.com/astola-studio/Balochi-Labz-Balad/issues))
 - [ ] Run a Success Build in [Actions](https://github.com/astola-studio/Balochi-Labz-Balad/actions)
 - [ ] Add/Fix features suggested by [Community](https://github.com/astola-studio/Balochi-Labz-Balad/issues)
 

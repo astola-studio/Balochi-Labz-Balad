@@ -31,12 +31,13 @@ import java.io.ByteArrayInputStream;
 import dd.astolastudio.balochidictionary.R;
 
 public class WordbookDetailFragment extends AbstractDetailFragment {
-	public static final String ARG_ENTRY = "entry";
 	public static final String TAG = "WordbookDetailFragment";
 	public static final String VIEWONWEB_TOOL_EXTRA_KEY = "dd.astolastudio.balochidictionary.wordbook.ViewonwebToolExtraKey";
 	private boolean mBlank = true;
 	private SoundPlayer soundPlayer;
 	String strHtml = "";
+
+	private int mWordbookId;
 
 	public static class NoNetworkConnectionDialogFragment extends DialogFragment {
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -53,9 +54,11 @@ public class WordbookDetailFragment extends AbstractDetailFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		if (getArguments() != null && getArguments().containsKey(ARG_ENTRY)) {
+		this.mWordbookId=getArguments() != null? getArguments().getInt("wordbook_id",-1):-1;
+		if (getArguments() != null && getArguments().containsKey("balochi")) {
 			this.mBlank = false;
-			this.strHtml = getArguments().getString(ARG_ENTRY);
+			Bundle arguments = getArguments();
+			this.strHtml = String.format("<h1>%s</h1></br>%s</br><h1></h1>%s</br><h1></h1>%s", arguments.getString("balochi"), arguments.getString("english"), arguments.getString("urdu"), arguments.getString("pronunciation"));
 		}
 		this.soundPlayer = new SoundPlayer(getActivity());
 	}
@@ -92,7 +95,7 @@ public class WordbookDetailFragment extends AbstractDetailFragment {
 	protected void addWordbookFavorite(int wordbookId, String word) {
 		ContentValues values = new ContentValues();
 		values.put("wordbookID", Integer.valueOf(wordbookId));
-		values.put("word", word);
+		values.put("balochi", word);
 		getActivity().getContentResolver().insert(WordbookFavorites.CONTENT_URI, values);
 		getActivity().invalidateOptionsMenu();
 		displayToast(getString(R.string.toast_favorite_added));
@@ -106,7 +109,7 @@ public class WordbookDetailFragment extends AbstractDetailFragment {
 	}
 
 	public void playSound() {
-		String soundName = getSoundFromWordbookId(((AbstractWordbookListFragment) getActivity().getFragmentManager().findFragmentById(R.id.item_list_container)).getSelectedWordbookId());
+		String soundName = getSoundFromWordbookId(mWordbookId);
 		if (!soundName.equals("")) {
 			this.soundPlayer.playSound(soundName);
 		}
@@ -122,7 +125,7 @@ public class WordbookDetailFragment extends AbstractDetailFragment {
 	}
 
 	private String getWordFromWordbookId(int id) {
-		String[] projection = new String[]{"langFullWord"};
+		String[] projection = new String[]{"balochi"};
 		String[] selectionArgs = new String[]{Integer.toString(id)};
 		Cursor cursor = getActivity().getContentResolver().query(WordbookContract.CONTENT_URI, projection, "_id = ?", selectionArgs, null);
 		if (cursor.moveToFirst()) {
@@ -132,13 +135,7 @@ public class WordbookDetailFragment extends AbstractDetailFragment {
 	}
 
 	private String getSoundFromWordbookId(int id) {
-		String[] projection = new String[]{"soundName"};
-		String[] selectionArgs = new String[]{Integer.toString(id)};
-		Cursor cursor = getActivity().getContentResolver().query(WordbookContract.CONTENT_URI, projection, "_id = ?", selectionArgs, null);
-		if (cursor.moveToFirst()) {
-			return cursor.getString(0);
-		}
-		throw new IllegalArgumentException("Invalid wordbook ID: " + id);
+		return "dummy.mp3";
 	}
 
 	private void displayViewonwebTool() {

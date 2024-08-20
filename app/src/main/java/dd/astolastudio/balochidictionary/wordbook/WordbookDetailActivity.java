@@ -18,12 +18,14 @@ import dd.astolastudio.balochidictionary.data.appdata.AppDataContract.WordbookFa
 public class WordbookDetailActivity extends AbstractDetailActivity {
 	
 	public static final String ARG_SOUND = "sound";
-	public static final String ARG_WORD = "word";
+	public static final String ARG_WORD = "balochi";
 	public static final String ARG_WORDBOOK_ID = "wordbook_id";
 	private String mSound;
 	private String mWord;
 	private int mWordbookId;
 	SoundPlayer soundPlayer;
+
+	private WordbookDetailFragment fragment;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,10 +37,18 @@ public class WordbookDetailActivity extends AbstractDetailActivity {
 		this.soundPlayer = new SoundPlayer(getApplicationContext());
 		if (savedInstanceState == null) {
 			Bundle arguments = new Bundle();
-			arguments.putString("entry", getIntent().getStringExtra("entry"));
-			WordbookDetailFragment fragment = new WordbookDetailFragment();
+			for(String s:new String[]{
+				"balochi", "english", "urdu", "pronunciation"
+			}){
+				arguments.putString(s, getIntent().getStringExtra(s));
+			}
+			arguments.putInt(ARG_WORDBOOK_ID, mWordbookId);
+			fragment = new WordbookDetailFragment();
 			fragment.setArguments(arguments);
 			getFragmentManager().beginTransaction().replace(R.id.item_detail_container, fragment).commitAllowingStateLoss();
+		}else{
+			fragment = (WordbookDetailFragment) getFragmentManager()
+				.findFragmentById(R.id.item_detail_container);
 		}
 	}
 
@@ -73,10 +83,10 @@ public class WordbookDetailActivity extends AbstractDetailActivity {
 				NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
 				return true;
 			case R.id.action_sound:
-				if (this.mSound.equals("")) {
+				if (fragment == null) {
 					return true;
 				}
-				this.soundPlayer.playSound(this.mSound);
+				fragment.playSound();
 				return true;
 			case R.id.action_add_favorite:
 				((WordbookDetailFragment) getFragmentManager().findFragmentById(R.id.item_detail_container)).addWordbookFavorite(this.mWordbookId, this.mWord);

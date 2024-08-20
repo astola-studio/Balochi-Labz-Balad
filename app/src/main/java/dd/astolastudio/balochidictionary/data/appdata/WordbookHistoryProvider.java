@@ -45,18 +45,18 @@ public class WordbookHistoryProvider extends ContentProvider {
 
 	private Cursor searchWords(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-		queryBuilder.setTables("wordbook_history");
+		queryBuilder.setTables("dictionary_history");
 		Cursor cursor = queryBuilder.query(this.mDatabase, projection, selection, selectionArgs, null, null, sortOrder);
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 		return cursor;
 	}
 
 	private Cursor getWord(Uri uri) {
-		String[] projection = new String[]{"_id", "wordbookID", "word"};
+		String[] projection = new String[]{"_id", "wordbookID", "balochi"};
 		String[] selectionArgs = new String[WORD_ID];
 		selectionArgs[WORDS] = uri.getLastPathSegment();
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-		queryBuilder.setTables("wordbook_history");
+		queryBuilder.setTables("dictionary_history");
 		Cursor cursor = queryBuilder.query(this.mDatabase, projection, "wordbookID = ?", selectionArgs, null, null, null);
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 		return cursor;
@@ -74,7 +74,7 @@ public class WordbookHistoryProvider extends ContentProvider {
 	}
 
 	public Uri insert(Uri uri, ContentValues values) {
-		Uri resultUri = ContentUris.withAppendedId(CONTENT_URI, this.mDatabase.insert("wordbook_history", "wordbookID", values));
+		Uri resultUri = ContentUris.withAppendedId(CONTENT_URI, this.mDatabase.insert("dictionary_history", "wordbookID", values));
 		getContext().getContentResolver().notifyChange(resultUri, null);
 		return resultUri;
 	}
@@ -87,10 +87,10 @@ public class WordbookHistoryProvider extends ContentProvider {
 		int affected;
 		switch (sMatcher.match(uri)) {
 			case WORDS /*0*/:
-				affected = this.mDatabase.delete("wordbook_history", selection, selectionArgs);
+				affected = this.mDatabase.delete("dictionary_history", selection, selectionArgs);
 				break;
 			case WORD_ID /*1*/:
-				affected = this.mDatabase.delete("wordbook_history", "_id=" + ContentUris.parseId(uri) + " AND (" + selection + ")", selectionArgs);
+				affected = this.mDatabase.delete("dictionary_history", "_id=" + ContentUris.parseId(uri) + " AND (" + selection + ")", selectionArgs);
 				break;
 			default:
 				throw new IllegalArgumentException("Unknown URI: " + uri);

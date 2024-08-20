@@ -62,7 +62,7 @@ public class WordbookProvider extends ContentProvider {
 
 	private Cursor search(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-		queryBuilder.setTables("wordbook");
+		queryBuilder.setTables("dictionary");
 		Cursor cursor = queryBuilder.query(this.mDatabase, projection, selection, selectionArgs, null, null, sortOrder);
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 		return cursor;
@@ -72,14 +72,14 @@ public class WordbookProvider extends ContentProvider {
 	private Cursor getSuggestions(String query) {
 		query = fixQuery(query);
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-		queryBuilder.setTables("wordbook");
-		return queryBuilder.query(this.mDatabase, new String[]{"_id as _id", "langFullWord AS suggest_text_1", "langLowercase", "_id AS suggest_intent_data_id"}, "betaSymbols LIKE ? OR betaNoSymbols LIKE ? OR langFullWord LIKE ? OR langLowercase LIKE ?", new String[]{query.toLowerCase(), query.toLowerCase(), query, query.toLowerCase()}, (String)null, (String)null, "langFullWord ASC", "20");
+		queryBuilder.setTables("dictionary");
+		return queryBuilder.query(this.mDatabase, new String[]{"_id as _id", "balochi AS suggest_text_1", "_id AS suggest_intent_data_id"}, "LOWER(balochi) LIKE LOWER(?) OR LOWER(urdu) LIKE LOWER(?) OR LOWER(english) LIKE LOWER(?) OR LOWER(pronunciation) LIKE LOWER(?)", new String[]{query.toLowerCase(), query.toLowerCase(), query, query.toLowerCase()}, (String)null, (String)null, "balochi ASC", LIMIT);
 	}
 	
 	private Cursor getWord(Uri uri) {
 		SQLiteQueryBuilder queruBuilder = new SQLiteQueryBuilder();
-		queruBuilder.setTables("wordbook");
-		return queruBuilder.query(this.mDatabase, new String[]{"_id", "entry", "langNoSymbols", "soundName"}, "_id = ?", new String[]{uri.getLastPathSegment()}, (String)null, (String)null, (String)null);
+		queruBuilder.setTables("dictionary");
+		return queruBuilder.query(this.mDatabase, new String[]{"_id", "balochi", "urdu", "english","pronunciation"}, "_id = ?", new String[]{uri.getLastPathSegment()}, (String)null, (String)null, (String)null);
 	}
 	public String getType(Uri uri) {
 		switch (sMatcher.match(uri)) {

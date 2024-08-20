@@ -126,6 +126,12 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
 		return sQLiteDatabase;
 	}
 
+	@Override
+	public void onOpen(SQLiteDatabase db) {
+		Log.d(TAG, "onOpen("+db+")");
+		super.onOpen(db);
+	}
+
 	public synchronized SQLiteDatabase getReadableDatabase() {
 		SQLiteDatabase sQLiteDatabase;
 		SQLiteDatabase db = null;
@@ -232,18 +238,17 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
 	private SQLiteDatabase createOrOpenDatabase(boolean force) throws SQLiteAssetException {
 		SQLiteDatabase db = null;
 		if (new File(this.mDatabasePath + "/" + this.mName).exists()) {
-			db = returnDatabase();
-		}
-		if (db != null) {
 			if (force) {
 				Log.w(TAG, "forcing database upgrade!");
 				copyDatabaseFromAssets();
-				db = returnDatabase();
 			}
-			return db;
+			db = returnDatabase();
 		}
-		copyDatabaseFromAssets();
-		return returnDatabase();
+		if (db == null) {
+			copyDatabaseFromAssets();
+			return returnDatabase();
+		}
+		return db;
 	}
 
 	private SQLiteDatabase returnDatabase() {
@@ -262,6 +267,10 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
 		Log.w(TAG, "copying database from assets...");
 		String path = this.mAssetPath;
 		String dest = this.mDatabasePath + "/" + this.mName;
+		if(new File(dest).exists()){
+			Log.d(TAG, mName+" exists, so skipping extraction!");
+			return;
+		}
 		boolean isZip = false;
 		try {
 			is = this.mContext.getAssets().open(path);

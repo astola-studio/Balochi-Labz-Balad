@@ -15,9 +15,9 @@ import dd.astolastudio.balochidictionary.data.appdata.AppDataContract.WordbookHi
 import dd.astolastudio.balochidictionary.data.appdata.WordbookHistoryProvider;
 
 public class WordbookHistoryListFragment extends AbstractWordbookListFragment implements LoaderCallbacks<Cursor> {
-	public static final String NAME = "wordbook_History";
+	public static final String NAME = "dictionary_history";
 	private static final String ORDER_BY = "_id DESC";
-	private static final String[] PROJECTION = new String[]{"_id", "word"};
+	private static final String[] PROJECTION = new String[]{"_id", "balochi"};
 	private static final String SELECTION = "";
 	private static final String[] SELECTION_ARGS = new String[0];
 	private static final Callbacks sDummyCallbacks = new Callbacks() {
@@ -29,7 +29,7 @@ public class WordbookHistoryListFragment extends AbstractWordbookListFragment im
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.lang_simple_list_item_activated_1, null, new String[]{"word"}, new int[]{android.R.id.text1}, 0);
+		this.mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.lang_simple_list_item_activated_1, null, new String[]{"balochi"}, new int[]{android.R.id.text1}, 0);
 		setListAdapter(this.mAdapter);
 		getLoaderManager().initLoader(0, null, this);
 	}

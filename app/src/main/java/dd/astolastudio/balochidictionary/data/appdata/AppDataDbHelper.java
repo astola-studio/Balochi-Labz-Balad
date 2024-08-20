@@ -9,12 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import dd.astolastudio.balochidictionary.data.wordbook.WordbookContract;
 
 public class AppDataDbHelper extends SQLiteOpenHelper {
-	public static final String DATABASE_NAME = "AppData.db";
+	public static final String DATABASE_NAME = "AppData";
 	public static final int DATABASE_VERSION = 3;
 	private static final String SQL_CREATE_SYNTAX_BOOKMARKS_TABLE = "CREATE TABLE subdict_bookmarks (_id INTEGER PRIMARY KEY, subdict_id INTEGER, subdict_section TEXT )";
-	private static final String SQL_CREATE_WORDBOOK_FAVORITES_TABLE = "CREATE TABLE wordbook_favorites (_id INTEGER PRIMARY KEY, wordbookID INTEGER, word TEXT)";
-	private static final String SQL_CREATE_WORDBOOK_HISTORY_TABLE = "CREATE TABLE wordbook_history (_id INTEGER PRIMARY KEY, wordbookID INTEGER, word TEXT )";
-	private static final String SQL_DELETE_WORDBOOK_FAVORITES_TABLE = "DROP TABLE IF EXISTS wordbook_favorites";
+	private static final String SQL_CREATE_WORDBOOK_FAVORITES_TABLE = "CREATE TABLE dictionary_favorites (_id INTEGER PRIMARY KEY, wordbookID INTEGER, balochi TEXT)";
+	private static final String SQL_CREATE_WORDBOOK_HISTORY_TABLE = "CREATE TABLE dictionary_history (_id INTEGER PRIMARY KEY, wordbookID INTEGER, balochi TEXT )";
+	private static final String SQL_DELETE_WORDBOOK_FAVORITES_TABLE = "DROP TABLE IF EXISTS dictionary_favorites";
 	private final Context mContext;
 
 	public AppDataDbHelper(Context context) {
@@ -30,12 +30,12 @@ public class AppDataDbHelper extends SQLiteOpenHelper {
 
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		SQLiteDatabase sQLiteDatabase = db;
-		Cursor oldData = sQLiteDatabase.query("wordbook_favorites", new String[]{"word"}, null, null, null, null, null, null);
+		Cursor oldData = sQLiteDatabase.query("dictionary_favorites", new String[]{"balochi"}, null, null, null, null, null, null);
 		db.execSQL(SQL_DELETE_WORDBOOK_FAVORITES_TABLE);
 		db.execSQL(SQL_CREATE_WORDBOOK_FAVORITES_TABLE);
 		ContentResolver resolver = this.mContext.getContentResolver();
 		String[] projection = new String[]{"_id"};
-		String selection = "langFullWord = ?";
+		String selection = "balochi = ?";
 		while (oldData.moveToNext()) {
 			String word=oldData.getString(0);
 			Cursor wordbookCursor = resolver.query(WordbookContract.CONTENT_URI, projection, selection, new String[]{oldData.getString(0)}, null);
@@ -43,8 +43,8 @@ public class AppDataDbHelper extends SQLiteOpenHelper {
 			int id = wordbookCursor.getInt(wordbookCursor.getColumnIndexOrThrow("_id"));
 			ContentValues values = new ContentValues(2);
 			values.put("wordbookID", Integer.valueOf(id));
-			values.put("word", word);
-			db.insert("wordbook_favorites", null, values);
+			values.put("balochi", word);
+			db.insert("dictionary_favorites", null, values);
 		}
 	}
 }

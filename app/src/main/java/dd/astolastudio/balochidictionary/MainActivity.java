@@ -203,7 +203,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	}
 
 	public void onItemSelected(String fragmentName) {
-		if (fragmentName.startsWith("wordbook_")) {
+		if (fragmentName.startsWith("wordbook_") || fragmentName.startsWith("dictionary_")) {
 			wordbookItemSelected();
 		} else if (fragmentName.startsWith("subdict_")) {
 			subdictItemSelected();
@@ -214,13 +214,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	}
 
 	private void wordbookItemSelected() {
-		String[] columns = new String[]{"entry", "langFullWord", "soundName"};
+		String[] columns = new String[]{"balochi","english","urdu","pronunciation"};
 		String id = Integer.toString(((AbstractWordbookListFragment) getFragmentManager().findFragmentById(R.id.item_list_container)).getSelectedWordbookId());
 		String[] selectionArgs = new String[]{id};
 		Uri uri = WordbookContract.CONTENT_URI;
 		Cursor cursor = getContentResolver().query(uri, columns, "_id = ?", selectionArgs, null);
 		if (cursor.moveToFirst()) {
-			displayWordbookEntry(id, cursor.getString(1), cursor.getString(0), cursor.getString(2));
+			displayWordbookEntry(id, cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
 			return;
 		}
 		throw new IllegalStateException("Failed to retrieve wordbook entry");
@@ -242,16 +242,20 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 		throw new IllegalStateException("Failed to retrieve subdict section");
 	}
 
-	void displayWordbookEntry(String id, String word, String entry, String sound) {
+	void displayWordbookEntry(String id, String balochi, String english, String urdu, String pronunciation) {
 		if (!(this.mMode.equals(Mode.WORDBOOK_BROWSE) || this.mMode.equals(Mode.WORDBOOK_FAVORITES) || this.mMode.equals(Mode.WORDBOOK_HISTORY))) {
 			switchToWordbookBrowse();
 		}
 		if (!this.mMode.equals(Mode.WORDBOOK_HISTORY)) {
-			addHistory(id, word);
+			addHistory(id, balochi);
 		}
 		if (this.mTwoPane) {
 			Bundle arguments = new Bundle();
-			arguments.putString("entry", entry);
+			arguments.putString("balochi", balochi);
+			arguments.putString("english", english);
+			arguments.putString("urdu", urdu);
+			arguments.putString("pronunciation", pronunciation);
+			arguments.putInt("wordbook_id", Integer.parseInt(id));
 			WordbookDetailFragment fragment = new WordbookDetailFragment();
 			fragment.setArguments(arguments);
 			FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -261,10 +265,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 		}
 		AbstractWordbookListFragment fragment2 = (AbstractWordbookListFragment) getFragmentManager().findFragmentById(R.id.item_list_container);
 		Intent intent = new Intent(this, WordbookDetailActivity.class);
-		intent.putExtra("entry", entry);
+		intent.putExtra("balochi", balochi);
+		intent.putExtra("english", english);
+		intent.putExtra("urdu", urdu);
+		intent.putExtra("pronunciation", pronunciation);
 		intent.putExtra("wordbook_id", fragment2.getSelectedWordbookId());
-		intent.putExtra("word", word);
-		intent.putExtra("sound", sound);
 		startActivity(intent);
 	}
 
@@ -292,7 +297,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 		getContentResolver().delete(WordbookHistoryProvider.CONTENT_URI, "wordbookID = ?", selectionArgs);
 		ContentValues values = new ContentValues();
 		values.put("wordbookID", id);
-		values.put("word", word);
+		values.put("balochi", word);
 		getContentResolver().insert(WordbookHistoryProvider.CONTENT_URI, values);
 	}
 
@@ -413,9 +418,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
 	void search(String query) {
 		String[] columns = new String[]{"_id"};
-		String[] selectionArgs = new String[]{query};
+		String[] selectionArgs = new String[]{query, query, query, query};
 		Log.d("ThangTB", "searching..." + query);
-		Cursor cursor = getContentResolver().query(WordbookProvider.CONTENT_URI, columns, "langFullWord = ?", selectionArgs, "_id ASC");
+		Cursor cursor = getContentResolver().query(WordbookProvider.CONTENT_URI, columns, "LOWER(balochi) LIKE LOWER(?) OR LOWER(urdu) LIKE LOWER(?) OR LOWER(english) LIKE LOWER(?) OR LOWER(pronunciation) LIKE LOWER(?)", selectionArgs, "_id ASC");
 		if (cursor.moveToFirst()) {
 			String id = cursor.getString(0);
 			ensureModeIsWordbookBrowse();
