@@ -65,7 +65,7 @@ Where have we reached so far?
 - [x] Add Dark Mode
 - [x] Fix Theming (Minor)
 - [x] Fix Drawer Bug (Highlighting)
-- [x] Fixed & Sorted the Dict DB and Made it Lite (40MB -> 500KB)
+- [x] Fixed 'n Sorted the Database & Made it Lite (40MB -> 500KB)
 - [ ] Add English to Balochi
 - [ ] Add More Words (Reach 15K)
 - [ ] Add User Dictionary ([Suggest Here](https://github.com/astola-studio/Balochi-Labz-Balad/issues))
